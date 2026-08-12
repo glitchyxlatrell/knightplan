@@ -1,3 +1,30 @@
+const assignments = [
+  {
+    title: "Data Structures Assignment",
+    course: "COP 3503",
+    dueDate: "2026-08-14",
+  },
+  {
+    title: "Calculus Homework",
+    course: "MAC 2312",
+    dueDate: "2026-08-15",
+  },
+  {
+    title: "Physics Lab",
+    course: "PHY 2048",
+    dueDate: "2026-08-17",
+  },
+];
+
+function formatDueDate(dateString: string) {
+  const date = new Date(dateString);
+
+  return date.toLocaleDateString("en-US", {
+    weekday: "long",
+  });
+}
+
+
 function AssignmentList() {
   return (
     <section className="mt-8 rounded-xl bg-white p-6 shadow-sm">
@@ -12,53 +39,26 @@ function AssignmentList() {
       </div>
 
       <div className="mt-5 divide-y">
-        <div className="flex items-center justify-between py-4">
-          <div>
+        {assignments.map((assignment) => (
+        <div
+            key={assignment.title}
+            className="flex items-center justify-between py-4"
+        >
+            <div>
             <p className="font-medium text-gray-900">
-              Data Structures Assignment
+                {assignment.title}
             </p>
 
             <p className="text-sm text-gray-500">
-              COP 3503
+                {assignment.course}
             </p>
-          </div>
+            </div>
 
-          <span className="text-sm font-medium text-red-500">
-            Tomorrow
-          </span>
+            <span className="text-sm font-medium text-gray-500">
+            {formatDueDate(assignment.dueDate)}
+            </span>
         </div>
-
-        <div className="flex items-center justify-between py-4">
-          <div>
-            <p className="font-medium text-gray-900">
-              Calculus Homework
-            </p>
-
-            <p className="text-sm font-medium text-orange-500">
-              Mac 2312
-            </p>
-          </div>
-
-          <span className="text-sm font-medium text-orange-500">
-            Friday
-          </span>
-        </div>
-
-        <div className="flex items-center justify-between py-4">
-          <div>
-            <p className="font-medium text-gray-900">
-              Physics Lab
-            </p>
-
-            <p className="text-sm text-gray-500">
-              PHY 2048
-            </p>
-          </div>
-
-          <span className="text-sm font-medium text-gray-500">
-            Monday
-          </span>
-        </div>
+        ))}
       </div>
     </section>
   );
